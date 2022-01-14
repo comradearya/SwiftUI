@@ -40,10 +40,9 @@ class MainMessagesViewModel:ObservableObject{
                     return
                 }
                 //self.errorMessage = "Data: \(data.description)"
-                let uid = data["uid"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
-                let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-                self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
+       
+                self.chatUser = ChatUser(data: data)
+                
             }
     }
     
