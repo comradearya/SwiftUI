@@ -9,8 +9,12 @@ import SwiftUI
 import Firebase
 
 struct LoginView: View {
-    @State var isLogingMode = false
-    @State var shouldShowImagePicker = false
+    
+    let didCompleteLoginProcess:() -> ()
+    
+    @State private var isLogingMode = false
+    @State private var shouldShowImagePicker = false
+    
     @State var email:String = ""
     @State var password:String = ""
     @State var image:UIImage?
@@ -102,19 +106,21 @@ struct LoginView: View {
     private func createNewAccount(){
         self.loginController.registerUser(with:self.email, password: self.password, image: self.image, onCompleted: {
             result in
-           
+            self.didCompleteLoginProcess()
         })
     }
     
     private func loginUser(){
         self.loginController.loginUser(with: email, password: password){ result in
-            
+            self.didCompleteLoginProcess()
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(didCompleteLoginProcess: {
+            
+        })
     }
 }

@@ -8,14 +8,20 @@
 import Foundation
 
 class MainMessagesViewModel:ObservableObject{
-    @Published var errorMessage = ""
+    @Published var errorMessage:String = ""
     @Published var chatUser:ChatUser?
     
+    @Published var isUserCurrentlyLoggedOut:Bool = false
+    
     init(){
+        DispatchQueue.main.async {
+            self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+        }
+
         fetchCurrentUser()
     }
     
-    private func fetchCurrentUser(){
+    func fetchCurrentUser(){
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Error fetching user uid"
             return }
@@ -39,5 +45,10 @@ class MainMessagesViewModel:ObservableObject{
                 let profileImageUrl = data["profileImageUrl"] as? String ?? ""
                 self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
             }
+    }
+    
+    func signOut(){
+        try? FirebaseManager.shared.auth.signOut()
+        isUserCurrentlyLoggedOut.toggle()
     }
 }

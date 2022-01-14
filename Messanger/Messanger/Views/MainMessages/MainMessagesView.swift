@@ -48,7 +48,8 @@ struct MainMessagesView: View {
                
             
             VStack(alignment: .leading, spacing: 4){
-                Text("\(vm.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? "")")
+                let email = vm.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? ""
+                Text(email)
                     .font(.system(size: 24, weight: .bold))
                 
                 HStack{
@@ -76,9 +77,16 @@ struct MainMessagesView: View {
             .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
                 .destructive(Text("Sign Out"), action: {
                     print("sign out")
+                    vm.signOut()
                 }),
                 .cancel()
             ])
+        }
+        .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil){
+            LoginView(didCompleteLoginProcess: {
+                self.vm.isUserCurrentlyLoggedOut = false
+                self.vm.fetchCurrentUser()
+            })
         }
     }
     
