@@ -6,18 +6,49 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MainMessagesView: View {
     @State var shouldPerformLogoutOptions:Bool = false
+    @ObservedObject private var vm = MainMessagesViewModel()
+    
+    var body: some View {
+        NavigationView{
+            VStack {
+                Text("CURRENT USER ID: \(vm.chatUser?.uid ?? "")")
+                self.customNavBar
+                self.messagesView
+            }
+            .overlay(newMessageButton, alignment: .bottom)
+            .navigationBarHidden(true)
+        }
+    }
     
     private var customNavBar: some View {
         HStack (spacing:16){
             
-            Image(systemName: "person.fill")
+            if let url = vm.chatUser?.profileImageUrl {
+            WebImage(url: URL(string: url))
+                .resizable()
+                .frame(width: 44, height: 44)
+                .clipped()
+                .cornerRadius(50)
+                .overlay(RoundedRectangle(cornerRadius: 44)
+                            .stroke(Color(.label), lineWidth: 1)
+                )
+                .shadow(radius: 5)
+            } else {
+                 Image(systemName: "person.fill")
                 .font(.system(size: 34, weight: .heavy))
+                .overlay(RoundedRectangle(cornerRadius: 44)
+                            .stroke(Color(.label), lineWidth: 1)
+                )
+                .shadow(radius: 5)
+            }
+               
             
             VStack(alignment: .leading, spacing: 4){
-                Text("Username")
+                Text("\(vm.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? "")")
                     .font(.system(size: 24, weight: .bold))
                 
                 HStack{
@@ -30,6 +61,7 @@ struct MainMessagesView: View {
                 }
             }
             Spacer()
+            
             Button{
                 self.shouldPerformLogoutOptions.toggle()
             } label:{
@@ -37,6 +69,7 @@ struct MainMessagesView: View {
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(Color(.label))
             }
+            
         }
         .padding()
         .actionSheet(isPresented: $shouldPerformLogoutOptions){
@@ -100,17 +133,6 @@ struct MainMessagesView: View {
                         .padding(.vertical, 8)
                 }.padding(.horizontal)
             }.padding(.bottom, 50)
-        }
-    }
-    
-    var body: some View {
-        NavigationView{
-            VStack {
-                self.customNavBar
-                self.messagesView
-            }
-            .overlay(newMessageButton, alignment: .bottom)
-            .navigationBarHidden(true)
         }
     }
 }
