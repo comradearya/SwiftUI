@@ -93,18 +93,23 @@ struct LoginView: View {
     
     private func handleAction(){
         if isLogingMode{
-            print("login")
+            self.loginUser()
         } else {
             self.createNewAccount()
         }
     }
     
     private func createNewAccount(){
-        self.loginController.registerUser(with:self.email, password: self.password, image: self.image)
+        self.loginController.registerUser(with:self.email, password: self.password, image: self.image, onCompleted: {
+            result in
+           
+        })
     }
     
     private func loginUser(){
-        self.loginController.loginUser(with: email, password: password)
+        self.loginController.loginUser(with: email, password: password){ result in
+            
+        }
     }
 }
 
