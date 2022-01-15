@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 struct MainMessagesView: View {
     @State var shouldPerformLogoutOptions:Bool = false
     @ObservedObject private var vm = MainMessagesViewModel()
-    
+    @State var shouldShowNewMessageScreen:Bool = false
     var body: some View {
         NavigationView{
             VStack {
@@ -92,7 +92,7 @@ struct MainMessagesView: View {
     
     private var newMessageButton: some View {
         Button {
-            
+            shouldShowNewMessageScreen.toggle()
         } label: {
             HStack{
                 Spacer()
@@ -107,6 +107,9 @@ struct MainMessagesView: View {
             .padding(.horizontal)
             .shadow(radius: 15)
             
+        }
+        .fullScreenCover(isPresented: $shouldShowNewMessageScreen, onDismiss: nil){
+            CreateNewMessageView()
         }
     }
     
