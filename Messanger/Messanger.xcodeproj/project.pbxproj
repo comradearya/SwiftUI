@@ -25,6 +25,7 @@
 		6DF840FD2791A78700788F5F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6DF840FC2791A78700788F5F /* SDWebImageSwiftUI */; };
 		6DF840FF2792BE6000788F5F /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF840FE2792BE6000788F5F /* CreateNewMessageView.swift */; };
 		6DF841012792C24E00788F5F /* CreateNewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF841002792C24E00788F5F /* CreateNewMessageViewModel.swift */; };
+		6DF841032794275400788F5F /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF841022794275400788F5F /* ChatLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		6DF840F92791A61F00788F5F /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		6DF840FE2792BE6000788F5F /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
 		6DF841002792C24E00788F5F /* CreateNewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewModel.swift; sourceTree = "<group>"; };
+		6DF841022794275400788F5F /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			children = (
 				6DD1DF472790772500AB2161 /* MainMessages */,
 				6DD1DF14278F40B900AB2161 /* LoginView.swift */,
+				6DF841022794275400788F5F /* ChatLogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				6DF841012792C24E00788F5F /* CreateNewMessageViewModel.swift in Sources */,
 				6DF840FA2791A61F00788F5F /* ChatUser.swift in Sources */,
 				6DD1DF15278F40B900AB2161 /* LoginView.swift in Sources */,
+				6DF841032794275400788F5F /* ChatLogView.swift in Sources */,
 				6DD1DF492790777600AB2161 /* MainMessagesView.swift in Sources */,
 				6DD1DF3827902EDB00AB2161 /* ImagePicker.swift in Sources */,
 				6DD1DF13278F40B900AB2161 /* MessangerApp.swift in Sources */,

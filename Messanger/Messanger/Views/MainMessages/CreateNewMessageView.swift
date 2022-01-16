@@ -12,13 +12,16 @@ struct CreateNewMessageView: View {
     @ObservedObject var vm = CreateNewMessageViewModel()
     @Environment(\.presentationMode) var presentationMode
     
+    let didSelectNewUser:(ChatUser) ->()
+    
     var body: some View {
         NavigationView{
             ScrollView {
                 Text(vm.errorMessage)
                 ForEach(vm.users){ user in
                     Button {
-                        presentationMode.wrappedValue.dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
+                        self.didSelectNewUser(user)
                     } label: {
                         HStack(spacing:16){
                             WebImage(url: URL(string: user.profileImageUrl))
