@@ -47,10 +47,11 @@ class LoginController{
             self.loginStatusMessage = "Successfully registered user \(result?.user.uid)"
             if let image = image {
                 self.persistImageToStorage(image)
+                onCompleted(true)
             } else {
                 self.loginStatusMessage = "You must add image to your account."
+                onCompleted(false)
             }
-            onCompleted(true)
         })
     }
     

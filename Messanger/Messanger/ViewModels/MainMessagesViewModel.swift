@@ -48,6 +48,7 @@ class MainMessagesViewModel:ObservableObject{
     
     func signOut(){
         try? FirebaseManager.shared.auth.signOut()
-        isUserCurrentlyLoggedOut.toggle()
+        self.isUserCurrentlyLoggedOut = true
+        self.chatUser = nil
     }
 }

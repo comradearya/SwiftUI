@@ -23,7 +23,7 @@ struct CreateNewMessageView: View {
                         self.presentationMode.wrappedValue.dismiss()
                         self.didSelectNewUser(user)
                     } label: {
-                        HStack(spacing:16){
+                        HStack(spacing:14){
                             WebImage(url: URL(string: user.profileImageUrl))
                                 .resizable()
                                 .scaledToFill()

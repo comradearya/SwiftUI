@@ -106,13 +106,18 @@ struct LoginView: View {
     private func createNewAccount(){
         self.loginController.registerUser(with:self.email, password: self.password, image: self.image, onCompleted: {
             result in
-            self.didCompleteLoginProcess()
+            if result {
+                self.loginUser()
+                self.didCompleteLoginProcess()
+            }
         })
     }
     
     private func loginUser(){
         self.loginController.loginUser(with: email, password: password){ result in
-            self.didCompleteLoginProcess()
+            if result {
+                self.didCompleteLoginProcess()
+            }
         }
     }
 }
