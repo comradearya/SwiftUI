@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ChatLogView: View {
     let chatUser:ChatUser?
-    @State var chatText = ""
+//    @State var chatText = ""
+    @ObservedObject var vm:ChatLogViewModel
+    
+    init(chatUser: ChatUser?){
+        self.chatUser = chatUser
+        self.vm = ChatLogViewModel(chatUser: self.chatUser)
+    }
     
     var body: some View {
         ZStack{
@@ -19,6 +25,7 @@ struct ChatLogView: View {
                 chatBottomBar
                     .background(.white)
             }
+            Text(vm.errorMessage)
         }
         .navigationTitle(self.chatUser?.email ?? "")
         .navigationBarTitleDisplayMode(.inline)
@@ -32,7 +39,6 @@ struct ChatLogView: View {
                     HStack{
                         Text("FAKE MESSAGE FOR NOW")
                             .foregroundColor(.white)
-                        
                     }.padding()
                         .background(Color.blue)
                         .cornerRadius(8)
@@ -40,9 +46,7 @@ struct ChatLogView: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
             }
-            
             HStack{ Spacer() }
-            
         }
         .background(Color(.init(white: 0.95, alpha:1)))
         .padding(.top, 8)
@@ -54,9 +58,13 @@ struct ChatLogView: View {
             Image(systemName: "photo.on.rectangle")
                 .font(.system(size: 24))
                 .foregroundColor(Color(.darkGray))
-            TextField("Description", text: $chatText)
+            ZStack{
+               // DescriptionPlaceholder()
+                TextField("Description", text: $vm.chatText)
+                    .opacity(vm.chatText.isEmpty ? 0.5 : 1)
+            }
             Button{
-                
+                vm.handleSend()
             } label: {
                 Text("Send")
                     .foregroundColor(.white)
@@ -68,13 +76,15 @@ struct ChatLogView: View {
             
         }
         .padding(.horizontal)
+        .padding(.vertical, 8)
 
     }
 }
 
 struct ChatLogView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatLogView(chatUser: ChatUser(data:(["uid":"6787g8fghctrdcrt6", "email":"arp1@gmail.com", "profileImageUrl": ""])))
+//        ChatLogView(chatUser: ChatUser(data:(["uid":"6787g8fghctrdcrt6", "email":"arp1@gmail.com", "profileImageUrl": ""])))
+        MainMessagesView()
         
     }
 }
