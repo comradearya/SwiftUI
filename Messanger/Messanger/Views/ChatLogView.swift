@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatLogView: View {
     let chatUser:ChatUser?
-//    @State var chatText = ""
+    //    @State var chatText = ""
     @ObservedObject var vm:ChatLogViewModel
     
     init(chatUser: ChatUser?){
@@ -19,10 +19,10 @@ struct ChatLogView: View {
     
     var body: some View {
         ZStack{
-           messagesView
+            self.messagesView
             VStack{
                 Spacer()
-                chatBottomBar
+                self.chatBottomBar
                     .background(.white)
             }
             Text(vm.errorMessage)
@@ -32,26 +32,40 @@ struct ChatLogView: View {
     }
     
     private var messagesView: some View {
-        ScrollView{
-            ForEach(0..<20){ num in
-                HStack{
-                    Spacer()
-                    HStack{
-                        Text("FAKE MESSAGE FOR NOW")
-                            .foregroundColor(.white)
-                    }.padding()
-                        .background(Color.blue)
-                        .cornerRadius(8)
+        ScrollView {
+            ForEach(vm.chatMessages){ message in
+                VStack{
+                    if message.fromId == FirebaseManager.shared.auth.currentUser?.uid {
+                        HStack{
+                            Spacer()
+                            HStack{
+                                Text(message.text)
+                                    .foregroundColor(.white)
+                            }.padding()
+                                .background(Color.blue)
+                                .cornerRadius(8)
+                        }
+                    } else {
+                        HStack{
+                            HStack{
+                                Text(message.text)
+                                    .foregroundColor(.black)
+                            }.padding()
+                                .background(Color.white)
+                                .cornerRadius(8)
+                            Spacer()
+                        }
+                    }
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
+                
             }
             HStack{ Spacer() }
         }
-        .background(Color(.init(white: 0.95, alpha:1)))
         .padding(.top, 8)
+        .background(Color(.init(white:0.97, alpha:1)))
     }
-    
     
     private var chatBottomBar: some View {
         HStack{
@@ -59,7 +73,7 @@ struct ChatLogView: View {
                 .font(.system(size: 24))
                 .foregroundColor(Color(.darkGray))
             ZStack{
-               // DescriptionPlaceholder()
+                // DescriptionPlaceholder()
                 TextField("Description", text: $vm.chatText)
                     .opacity(vm.chatText.isEmpty ? 0.5 : 1)
             }
@@ -77,13 +91,13 @@ struct ChatLogView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-
+        
     }
 }
 
 struct ChatLogView_Previews: PreviewProvider {
     static var previews: some View {
-//        ChatLogView(chatUser: ChatUser(data:(["uid":"6787g8fghctrdcrt6", "email":"arp1@gmail.com", "profileImageUrl": ""])))
+        //        ChatLogView(chatUser: ChatUser(data:(["uid":"6787g8fghctrdcrt6", "email":"arp1@gmail.com", "profileImageUrl": ""])))
         MainMessagesView()
         
     }
