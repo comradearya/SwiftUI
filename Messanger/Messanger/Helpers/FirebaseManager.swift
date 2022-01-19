@@ -8,6 +8,14 @@
 import Foundation
 import Firebase
 
+struct FirebaseConstraints{
+    static let fromId = "fromId"
+    static let toId = "toId"
+    static let text = "text"
+    
+    static let timestamp = "timestamp"
+}
+
 class FirebaseManager:NSObject{
     let auth:Auth
     let storage:Storage

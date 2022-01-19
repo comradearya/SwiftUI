@@ -8,26 +8,6 @@
 import SwiftUI
 import Firebase
 
-struct FirebaseConstraints{
-    static let fromId = "fromId"
-    static let toId = "toId"
-    static let text = "text"
-    
-    static let timestamp = "timestamp"
-}
-struct ChatMessage:Identifiable {
-    var id:String { documentId }
-    let fromId, toId, text, documentId:String
-    
-    init(documentId: String, data: [String:Any]){
-        self.documentId = documentId
-        self.fromId = data[FirebaseConstraints.fromId] as? String ?? ""
-        self.toId = data[FirebaseConstraints.toId] as? String ?? ""
-        self.text = data[FirebaseConstraints.text] as? String ?? ""
-    }
-}
-
-
 class ChatLogViewModel:ObservableObject{
     @Published var chatText = ""
     @Published var errorMessage = ""

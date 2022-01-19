@@ -18,28 +18,7 @@ struct CreateNewMessageView: View {
         NavigationView{
             ScrollView {
                 Text(vm.errorMessage)
-                ForEach(vm.users){ user in
-                    Button {
-                        self.presentationMode.wrappedValue.dismiss()
-                        self.didSelectNewUser(user)
-                    } label: {
-                        HStack(spacing:14){
-                            WebImage(url: URL(string: user.profileImageUrl))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .clipped()
-                                .cornerRadius(50)
-                                .overlay(RoundedRectangle(cornerRadius: 50)
-                                            .stroke(Color(.label),
-                                                    lineWidth: 2))
-                            Text(user.email)
-                            Spacer()
-                        }.padding(.horizontal)
-                        Divider()
-                            .padding(.vertical)
-                    }
-                }
+                usersList
             }.navigationTitle("New Message")
                 .toolbar{
                     ToolbarItemGroup(placement: .navigationBarLeading){
@@ -50,6 +29,31 @@ struct CreateNewMessageView: View {
                         }
                     }
                 }
+        }
+    }
+    
+    private var usersList: some View {
+        ForEach(vm.users){ user in
+            Button {
+                self.presentationMode.wrappedValue.dismiss()
+                self.didSelectNewUser(user)
+            } label: {
+                HStack(spacing:14){
+                    WebImage(url: URL(string: user.profileImageUrl))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipped()
+                        .cornerRadius(50)
+                        .overlay(RoundedRectangle(cornerRadius: 50)
+                                    .stroke(Color(.label),
+                                            lineWidth: 2))
+                    Text(user.email)
+                    Spacer()
+                }.padding(.horizontal)
+                Divider()
+                    .padding(.vertical)
+            }
         }
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChatLogView: View {
     let chatUser:ChatUser?
-    //    @State var chatText = ""
     @ObservedObject var vm:ChatLogViewModel
     
     init(chatUser: ChatUser?){
