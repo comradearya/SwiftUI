@@ -18,8 +18,8 @@ struct ChatLogView: View {
     
     var body: some View {
         ZStack{
-            self.messagesView
             VStack{
+                self.messagesView
                 Spacer()
                 self.chatBottomBar
                     .background(.white)
@@ -30,37 +30,25 @@ struct ChatLogView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
+    static let emptyScrollToString = "Empty"
     private var messagesView: some View {
         ScrollView {
-            ForEach(vm.chatMessages){ message in
+            ScrollViewReader{ scrollViewProxy in
                 VStack{
-                    if message.fromId == FirebaseManager.shared.auth.currentUser?.uid {
-                        HStack{
-                            Spacer()
-                            HStack{
-                                Text(message.text)
-                                    .foregroundColor(.white)
-                            }.padding()
-                                .background(Color.blue)
-                                .cornerRadius(8)
-                        }
-                    } else {
-                        HStack{
-                            HStack{
-                                Text(message.text)
-                                    .foregroundColor(.black)
-                            }.padding()
-                                .background(Color.white)
-                                .cornerRadius(8)
-                            Spacer()
-                        }
+                    ForEach(vm.chatMessages){ message in
+                        MessageView(message: message)
+                    }
+                    HStack{ Spacer() }
+                    .id(Self.emptyScrollToString)
+                }
+                .onReceive(vm.$count){
+                    _ in
+                    withAnimation(.easeOut(duration: 0.5)){
+                    scrollViewProxy.scrollTo(Self.emptyScrollToString, anchor: .bottom)
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top, 8)
-                
             }
-            HStack{ Spacer() }
+            
         }
         .padding(.top, 8)
         .background(Color(.init(white:0.97, alpha:1)))
