@@ -63,6 +63,9 @@ class ChatLogViewModel:ObservableObject{
                 return
             }
             print("Successfully saved current user sending message")
+            
+            self.persistRecentMessage()
+            
             self.chatText = ""
             self.count += 1
         }
@@ -79,5 +82,33 @@ class ChatLogViewModel:ObservableObject{
             }
             print("Recepient saved message as well")
         }
+    }
+    
+    private func persistRecentMessage(){
+        
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return }
+        guard let toId = self.chatUser?.uid else {return }
+        let document = FirebaseManager.shared.firestore
+            .collection("recent_message")
+            .document(uid)
+            .collection("messages")
+            .document(toId)
+        
+        let data = [FirebaseConstraints.timestamp : Timestamp(),
+                    FirebaseConstraints.text : self.chatText,
+                    FirebaseConstraints.toId : toId,
+                    FirebaseConstraints.fromId: uid,
+                    FirebaseConstraints.profileImageUrl: chatUser?.profileImageUrl ??  "",
+                    FirebaseConstraints.email : chatUser?.email] as [String:Any]
+        
+        //TODO: - Implement saving another similar dictionary for the recepient of this message...how?
+        document.setData(data){ error in
+            if let error = error {
+                self.errorMessage = "Failed to save recent message: \(error)"
+                print(self.errorMessage)
+                return
+            }
+        }
+        
     }
 }

@@ -11,6 +11,8 @@ struct ChatLogView: View {
     let chatUser:ChatUser?
     @ObservedObject var vm:ChatLogViewModel
     
+    static let emptyScrollToString = "Empty"
+    
     init(chatUser: ChatUser?){
         self.chatUser = chatUser
         self.vm = ChatLogViewModel(chatUser: self.chatUser)
@@ -30,7 +32,6 @@ struct ChatLogView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    static let emptyScrollToString = "Empty"
     private var messagesView: some View {
         ScrollView {
             ScrollViewReader{ scrollViewProxy in

@@ -12,6 +12,7 @@
 		6D65ED12279731C000F7D741 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6D65ED11279731C000F7D741 /* FirebaseStorage */; };
 		6D65ED142797383300F7D741 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D65ED132797383300F7D741 /* ChatMessage.swift */; };
 		6D65ED1627984A0100F7D741 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D65ED1527984A0100F7D741 /* MessageView.swift */; };
+		6D65ED182799763E00F7D741 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D65ED172799763E00F7D741 /* RecentMessage.swift */; };
 		6DD1DF13278F40B900AB2161 /* MessangerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1DF12278F40B900AB2161 /* MessangerApp.swift */; };
 		6DD1DF15278F40B900AB2161 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1DF14278F40B900AB2161 /* LoginView.swift */; };
 		6DD1DF17278F40BC00AB2161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DD1DF16278F40BC00AB2161 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		6D65ED132797383300F7D741 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		6D65ED1527984A0100F7D741 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		6D65ED172799763E00F7D741 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		6DD1DF0F278F40B900AB2161 /* Messanger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD1DF12278F40B900AB2161 /* MessangerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessangerApp.swift; sourceTree = "<group>"; };
 		6DD1DF14278F40B900AB2161 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				6DF840F92791A61F00788F5F /* ChatUser.swift */,
 				6D65ED132797383300F7D741 /* ChatMessage.swift */,
+				6D65ED172799763E00F7D741 /* RecentMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			files = (
 				6DF840FF2792BE6000788F5F /* CreateNewMessageView.swift in Sources */,
 				6DF841012792C24E00788F5F /* CreateNewMessageViewModel.swift in Sources */,
+				6D65ED182799763E00F7D741 /* RecentMessage.swift in Sources */,
 				6D65ED142797383300F7D741 /* ChatMessage.swift in Sources */,
 				6DF840FA2791A61F00788F5F /* ChatUser.swift in Sources */,
 				6DD1DF15278F40B900AB2161 /* LoginView.swift in Sources */,

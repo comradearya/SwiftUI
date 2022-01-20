@@ -12,8 +12,9 @@ struct FirebaseConstraints{
     static let fromId = "fromId"
     static let toId = "toId"
     static let text = "text"
-    
+    static let profileImageUrl = "profileImageUrl"
     static let timestamp = "timestamp"
+    static let email = "email"
 }
 
 class FirebaseManager:NSObject{

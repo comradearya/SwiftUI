@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Firebase
+
 
 struct MainMessagesView: View {
     @State var shouldPerformLogoutOptions:Bool = false
@@ -125,27 +127,37 @@ struct MainMessagesView: View {
     
     var messagesView: some View {
         ScrollView{
-            ForEach(0..<10, id:\.self){
-                num in
+            ForEach(vm.recentMessages){
+                recentMessage in
                 VStack {
                     NavigationLink{
-                        Text("destination")
+                        Text("Destination")
                     } label: {
                         HStack(spacing:16){
-                            
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 32))
-                                .padding(8)
-                                .overlay(RoundedRectangle(cornerRadius: 44)
-                                            .stroke(Color(.label), lineWidth: 1))
+                            WebImage(url: URL(string: recentMessage.profileImageUrl))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width:64, height:64)
+                                .clipped()
+                                .cornerRadius(64)
+                                .overlay(RoundedRectangle(cornerRadius: 64)
+                                            .stroke(Color.black, lineWidth: 1))
+                                .shadow(radius: 5)
+//                            Image(systemName: "person.fill")
+//                                    .font(.system(size: 32))
+//                                    .padding(8)
+//                                    .overlay(RoundedRectangle(cornerRadius: 44)
+//                                                .stroke(Color(.label), lineWidth: 1))
                             
                             VStack(alignment:.leading){
-                                Text("Username")
+                                Text(recentMessage.email)
                                     .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(Color(.label))
                                 
-                                Text("Message sent to user")
+                                Text(recentMessage.text)
                                     .font(.system(size: 14))
                                     .foregroundColor(Color(.lightGray))
+                                    .multilineTextAlignment(.leading)
                             }
                             Spacer()
                             
