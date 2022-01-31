@@ -161,7 +161,7 @@ struct MainMessagesView: View {
                             }
                             Spacer()
                             
-                            Text("22d")
+                            Text(recentMessage.timestamp.description)
                                 .font(.system(size:14, weight:.semibold))
                             
                         }

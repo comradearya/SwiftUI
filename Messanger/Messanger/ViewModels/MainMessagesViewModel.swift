@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestoreSwift
 
 class MainMessagesViewModel:ObservableObject{
     @Published var errorMessage:String = ""
@@ -37,13 +39,21 @@ class MainMessagesViewModel:ObservableObject{
                 }
                 querySnapshot?.documentChanges.forEach{ change in
                     let documentId = change.document.documentID
-                    let data = change.document.data()
+                    //   let data = change.document.data()
                     if let index = self.recentMessages.firstIndex(where: { rm in
-                        return rm.documentId == documentId
+                        return rm.id == documentId
                     }){
                         self.recentMessages.remove(at: index)
                     }
-                    self.recentMessages.insert(.init(documentId: documentId, data: data), at: 0)
+                    
+                    do {
+                        if let rm = try change.document.data(as: RecentMessage.self){
+                            self.recentMessages.insert(rm, at: 0)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                    
                 }
             }
     }
@@ -67,7 +77,7 @@ class MainMessagesViewModel:ObservableObject{
                     return
                 }
                 //self.errorMessage = "Data: \(data.description)"
-       
+                
                 self.chatUser = ChatUser(data: data)
                 
             }
